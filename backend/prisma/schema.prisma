@@ -1,0 +1,128 @@
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  createdAt     DateTime @default(now())
+
+
+  orgMaps       UserOrgMap[]
+  instituteMaps UserInstituteMap[]
+  installedApps InstituteInstalledApp[] @relation("InstalledBy")
+}
+
+model Organization {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+
+  institutes Institute[]
+  userMaps   UserOrgMap[]
+}
+
+model Institute {
+  id             Int      @id @default(autoincrement())
+  organizationId Int
+  name           String
+  createdAt      DateTime @default(now())
+
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  userMaps       UserInstituteMap[]
+  installedApps  InstituteInstalledApp[]
+  webhookLogs     WebhookLog[]
+
+  @@index([organizationId])
+}
+
+model UserOrgMap {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  organizationId Int
+  role           String
+
+
+  user         User         @relation(fields: [userId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+  @@index([userId])
+}
+
+model UserInstituteMap {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  instituteId Int
+  role        String
+
+
+  user      User      @relation(fields: [userId], references: [id])
+  institute Institute @relation(fields: [instituteId], references: [id])
+
+  @@unique([userId, instituteId])
+  @@index([instituteId])
+  @@index([userId])
+}
+
+model App {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  description         String?
+  category            String?
+  launchUrl           String
+  webhookUrl          String?
+  logoUrl             String?
+  requiredPermissions Json
+
+
+  installations InstituteInstalledApp[]
+  webhookLogs   WebhookLog[]
+}
+
+model InstituteInstalledApp {
+  id          Int      @id @default(autoincrement())
+  instituteId Int
+  appId       Int
+  settings    Json
+  installedAt DateTime @default(now())
+  installedBy Int
+
+
+  institute   Institute @relation(fields: [instituteId], references: [id])
+  app         App       @relation(fields: [appId], references: [id])
+  installer   User      @relation("InstalledBy", fields: [installedBy], references: [id])
+
+  @@unique([instituteId, appId])
+  @@index([instituteId])
+  @@index([appId])
+}
+
+model WebhookLog {
+  id          Int      @id @default(autoincrement())
+  instituteId Int
+  appId       Int
+  payload     Json
+  statusCode  Int?
+  receivedAt  DateTime @default(now())
+
+
+  institute Institute @relation(fields: [instituteId], references: [id])
+  app       App       @relation(fields: [appId], references: [id])
+
+  @@index([instituteId])
+  @@index([appId])
+}

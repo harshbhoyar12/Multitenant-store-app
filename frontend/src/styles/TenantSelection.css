@@ -1,0 +1,88 @@
+.tenant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tenant-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.tenant-card:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.3) !important;
+}
+
+.tenant-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: hsl(var(--primary) / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tenant-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tenant-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tenant-card-role {
+    font-size: 0.8rem;
+    color: hsl(var(--foreground) / 0.5);
+}
+
+.tenant-arrow {
+    color: hsl(var(--foreground) / 0.3);
+}
+
+.tenant-back-btn {
+    background: none;
+    border: none;
+    color: hsl(var(--primary));
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.tenant-back-btn:hover {
+    text-decoration: underline;
+}
+
+.tenant-logout-btn {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: hsl(var(--foreground) / 0.5);
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding-top: 1rem;
+    border-top: 1px solid hsl(var(--border));
+    transition: color 0.2s;
+}
+
+.tenant-logout-btn:hover {
+    color: hsl(var(--error));
+}

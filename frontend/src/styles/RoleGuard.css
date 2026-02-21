@@ -1,0 +1,20 @@
+.access-denied-container {
+    padding: 3rem;
+    text-align: center;
+    background: hsl(var(--card) / 0.5);
+    border: 1px solid hsl(var(--error) / 0.2);
+    border-radius: var(--radius);
+    margin: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.access-denied-container h3 {
+    color: hsl(var(--error));
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.access-denied-container p {
+    color: hsl(var(--foreground) / 0.6);
+    font-size: 1rem;
+}

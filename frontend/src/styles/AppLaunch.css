@@ -1,0 +1,116 @@
+.launch-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+    gap: 1.25rem;
+}
+
+.launch-loading-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.launch-loader {
+    width: 48px;
+    height: 48px;
+    border: 4px solid hsl(var(--primary) / 0.1);
+    border-top-color: hsl(var(--primary));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.launch-loading-text {
+    color: hsl(var(--foreground) / 0.5);
+    font-weight: 500;
+}
+
+.launch-error-container {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.launch-error-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: hsl(var(--error));
+}
+
+.launch-error-text {
+    color: hsl(var(--foreground) / 0.6);
+    margin-bottom: 2rem;
+}
+
+.launch-error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.launch-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    background: hsl(var(--card) / 0.3);
+}
+
+.launch-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.launch-divider {
+    width: 1px;
+    height: 24px;
+    background: hsl(var(--border));
+}
+
+.launch-secure-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: hsl(var(--foreground) / 0.6);
+}
+
+.launch-popout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: hsl(var(--primary));
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.launch-popout:hover {
+    text-decoration: underline;
+}
+
+.launch-frame-wrapper {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 24px;
+    padding: 4px;
+    background: hsl(var(--border));
+}
+
+.launch-iframe {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 20px;
+}
